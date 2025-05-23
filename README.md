@@ -63,7 +63,7 @@ cd your-repo-name
 ### 2. Create `.env` File
 
 ```env
-DATABASE_URL=postgresql://wakil:testpass1234@db:5432/flask_db1
+DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@<your hostname>:5432/<POSTGRES_DB>
 JWT_SECRET_KEY=your_very_secret_key
 PGADMIN_DEFAULT_EMAIL=admin@admin.com
 PGADMIN_DEFAULT_PASSWORD=admin123
@@ -88,7 +88,7 @@ docker-compose up --build
    - **Password:** `admin123`
 3. Add a new server:
    - **Name:** `Postgres`
-   - **Host name/address:** `db`
+   - **Host name/address:** `your hostname`
    - **Port:** `5432`
    - **Username:** `<your username>`
    - **Password:** `<your password>`
@@ -143,7 +143,50 @@ docker-compose down -v
 
 ---
 
+##  Testing API Endpoints (via terminal)
 
+###  Registration
+
+```
+curl -X POST http://127.0.0.1:5000/auth/register \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "password": "testpass"}'
+```
+### output
+
+```
+{"msg":"User registered successfully"}
+```
+### Login
+
+```
+curl -X POST http://127.0.0.1:5000/auth/login \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "password": "testpass"}'
+```
+### Output
+```
+{"access_token": "<JWT_TOKEN_HERE>"}
+```
+### Protected Login
+```
+curl -X GET http://127.0.0.1:5000/protected/dashboard \
+-H "Authorization: Bearer <JWT_TOKEN_HERE>"
+
+```
+### Output
+```
+{"message":"Welcome testuser, this is your dashboard"}
+```
+### Logout
+```
+curl -X POST http://127.0.0.1:5000/auth/logout \
+-H "Authorization: Bearer <JWT_TOKEN_HERE>"
+```
+### Output
+```
+{"msg":"Successfully logged out"}
+```
 
 ##  License
 
