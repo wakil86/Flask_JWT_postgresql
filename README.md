@@ -2,6 +2,8 @@
 This repository contains a secure Flask API implementing JWT (JSON Web Tokens) based authentication using a PostgreSQL database. It's designed to be set up and run directly on your system, providing a backend for user management and protected resource access.
 
 ---
+# Project Diagram
+![JWT Workflow](images/Flask_JWT.svg)
 
 # JWT Authorization Overview
 JWT (JSON Web Token) is a compact, URL-safe means of representing claims between two parties. In this project, JWT is used for secure user authentication and authorization. After a successful login, the server generates a token that encodes the user's identity and permissions. This token is sent to the client and must be included in subsequent requests to access protected routes. The server validates the token to authorize access, ensuring stateless and secure communication between client and server.
