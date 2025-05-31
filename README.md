@@ -1,6 +1,5 @@
-#  Flask REST API with PostgreSQL, JWT Authentication, and pgAdmin 
-
-This is a Dockerized Flask REST API project that includes user registration, login, protected routes using JWT authentication, and PostgreSQL as the backend database. pgAdmin is included for managing the database via GUI.
+# Flask JWT Authentication with PostgreSQL
+This repository contains a secure Flask API implementing JWT (JSON Web Tokens) based authentication using a PostgreSQL database. It's designed to be set up and run directly on your system, providing a backend for user management and protected resource access.
 
 ---
 
@@ -16,7 +15,6 @@ JWT (JSON Web Token) is a compact, URL-safe means of representing claims between
 ```
 Project/
 │
-├── .env
 ├── app.py
 ├── routes/
 │   ├── auth_routes.py
@@ -25,105 +23,125 @@ Project/
 ├── config.py
 ├── models.py
 ├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
 └── README.md
 ```
 
----
 
-##  Features
+#  Setup Instructions
 
--  JWT Authentication
--  User Registration and Login
--  Protected Routes
--  PostgreSQL Database
--  pgAdmin Interface for managing PostgreSQL
--  Docker + Docker Compose for containerization
 
----
+## 1. Database setup
 
-##  Prerequisites
+### Install PostgreSQL
+```bash
+sudo apt update
+sudo apt install postgresql postgresql-contrib libpq-dev build-essential
+```
+### Active PosrgreSQL Database
+```bash
+sudo systemctl start postgresql
+```
+### Access PostgreSQL as the ```postgres``` user:
+```bash
+sudo -i -u postgres
+psql
+```
+You should now be at the ```postgres=#``` prompt.
 
-- Docker & Docker Compose installed
-- Git installed
-- Python (only for local development)
+### Create your database
+```bash
+CREATE DATABASE <your_database_name>;
+```
+### Create database user
+```bash
+CREATE USER <username> WITH PASSWORD <your_strong_password>;
+```
+### Grant privilage to user
+```bash
+GRANT ALL PRIVILEGES ON DATABASE <your_database_name> TO <username>;
+```
+### Grant schema-level privilage 
+```bash
+\c <your_database_name>; # Connect to your new database first
+GRANT CREATE ON SCHEMA public TO <username>;
+```
+- This allows ```<username>``` to create tables within the ```public``` schema.
 
----
+### Exit ```psql``` and the ```postgres``` user session:
+```bash
+\q
+exit
+```
 
-##  Setup Instructions
 
-### 1. Clone the Repository
+
+## 2. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/wakil86/Flask_JWT_postgresql.git
+cd Flask_JWT_postgresql
 ```
 
-### 2. Create `.env` File
-
-```env
-DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@<your hostname>:5432/<POSTGRES_DB>
-JWT_SECRET_KEY=your_very_secret_key
-PGADMIN_DEFAULT_EMAIL=admin@admin.com
-PGADMIN_DEFAULT_PASSWORD=admin123
-```
-
-### 3. Build and Run the Containers
+## 3. Create & activate Python environment
 
 ```bash
-docker-compose up --build
+python3 -m venv venv
+source venv/bin/activate
 ```
-
-- Flask app: [http://localhost:5000](http://localhost:5000)
-- pgAdmin: [http://localhost:5050](http://localhost:5050)
-
----
-
-##  Accessing pgAdmin
-
-1. Go to `http://localhost:5050`
-2. Login:
-   - **Email:** `admin@admin.com`
-   - **Password:** `admin123`
-3. Add a new server:
-   - **Name:** `Postgres`
-   - **Host name/address:** `your hostname`
-   - **Port:** `5432`
-   - **Username:** `<your username>`
-   - **Password:** `<your password>`
-
----
+### 4. Install Python dependencies
+```bash
+pip install -r requirements.txt
+```
+### 5. Run the Flask app
+```bash
+python app.py
+```
+### Expected output
+![APP_RUN](images/app_run.png)
 
 ##  Testing API Endpoints (via Postman)
+
+
+### Home 
+```
+GET http://127.0.0.1:5000
+```
+### Expected output
+![APP_RUN](images/home.png)
 
 ###  Registration
 
 ```
-POST /auth/register
+POST http://127.0.0.1:5000/auth/register
 {
   "username": "testuser",
   "password": "testpass"
 }
 ```
+### Expected output
+![APP_RUN](images/register1.png)
 
 ###  Login
 
 ```
-POST /auth/login
+POST http://127.0.0.1:5000/auth/login
 {
   "username": "testuser",
   "password": "testpass"
 }
 ```
+### Expected output
+![APP_RUN](images/login1.png)
 
 ###  Protected Route
 
 ```
-GET /protected/dashboard
+GET http://127.0.0.1:5000/protected/dashboard
 Headers:
   Authorization: Bearer <JWT_TOKEN>
 ```
+### Expected output
+![APP_RUN](images/dashb.png)
 
 ###  Logout
 
@@ -132,16 +150,11 @@ POST /auth/logout
 Headers:
   Authorization: Bearer <JWT_TOKEN>
 ```
-
+### Expected output
+![APP_RUN](images/logout1.png)
 ---
 
-##  Clean Up
 
-```bash
-docker-compose down -v
-```
-
----
 
 ##  Testing API Endpoints (via terminal)
 
