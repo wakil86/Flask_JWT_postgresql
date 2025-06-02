@@ -84,17 +84,11 @@ git clone https://github.com/wakil86/Flask_JWT_postgresql.git
 cd Flask_JWT_postgresql
 ```
 
-## 3. Create & activate Python environment
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-### 4. Install Python dependencies
+### 3. Install Python dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### 5. Run the Flask app
+### 4. Run the Flask app
 ```bash
 python app.py
 ```
