@@ -64,7 +64,7 @@ GRANT ALL PRIVILEGES ON DATABASE flask_jwt_db TO poridhi;
 ```
 ### Grant schema-level privilage 
 ```bash
-\c flask_jwt_db; # Connect to your new database first
+\c flask_jwt_db;
 GRANT CREATE ON SCHEMA public TO poridhi;
 ```
 - This allows ```poridhi``` to create tables within the ```public``` schema.
