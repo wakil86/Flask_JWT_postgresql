@@ -83,14 +83,20 @@ exit
 git clone https://github.com/wakil86/Flask_JWT_postgresql.git
 cd Flask_JWT_postgresql
 ```
+## 3. Update & Install python3 & pip
+```bash
+sudo apt update
+sudo apt install -y python3 python3-pip
+```
 
-### 3. Install Python dependencies
+
+## 4. Install Python dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### 4. Run the Flask app
+## 5. Run the Flask app
 ```bash
-python app.py
+python3 app.py
 ```
 ### Expected output
 ![APP_RUN](images/app_run.png)
