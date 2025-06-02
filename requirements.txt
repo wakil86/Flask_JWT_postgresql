@@ -1,5 +1,6 @@
 Flask
 Flask-JWT-Extended
+psycopg2-binary
 Flask-SQLAlchemy
 python-dotenv
 Werkzeug
