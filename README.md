@@ -52,22 +52,22 @@ You should now be at the ```postgres=#``` prompt.
 
 ### Create your database
 ```bash
-CREATE DATABASE <your_database_name>;
+CREATE DATABASE flask_jwt_db;
 ```
 ### Create database user
 ```bash
-CREATE USER <username> WITH PASSWORD <your_strong_password>;
+CREATE USER poridhi WITH PASSWORD 'poridhi1234';
 ```
 ### Grant privilage to user
 ```bash
-GRANT ALL PRIVILEGES ON DATABASE <your_database_name> TO <username>;
+GRANT ALL PRIVILEGES ON DATABASE flask_jwt_db TO poridhi;
 ```
 ### Grant schema-level privilage 
 ```bash
-\c <your_database_name>; # Connect to your new database first
-GRANT CREATE ON SCHEMA public TO <username>;
+\c flask_jwt_db;
+GRANT CREATE ON SCHEMA public TO poridhi;
 ```
-- This allows ```<username>``` to create tables within the ```public``` schema.
+- This allows ```poridhi``` to create tables within the ```public``` schema.
 
 ### Exit ```psql``` and the ```postgres``` user session:
 ```bash
@@ -83,20 +83,20 @@ exit
 git clone https://github.com/wakil86/Flask_JWT_postgresql.git
 cd Flask_JWT_postgresql
 ```
-
-## 3. Create & activate Python environment
-
+## 3. Update & Install python3 & pip
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+sudo apt update
+sudo apt install -y python3 python3-pip
 ```
-### 4. Install Python dependencies
+
+
+## 4. Install Python dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### 5. Run the Flask app
+## 5. Run the Flask app
 ```bash
-python app.py
+python3 app.py
 ```
 ### Expected output
 ![APP_RUN](images/app_run.png)
