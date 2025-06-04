@@ -263,11 +263,11 @@ cd ~/my_flask_api
 ```
 ### Clone your repository
 ```bash
-git clone https://github.com/wakil86/Flask_JWT_postgresql.git
+git clone https://github.com/wakil86/Flask_JWT_postgresql_docker.git
 ```
 ### Navigate into the project directory
 ```bash
-cd Flask_JWT_postgresql
+cd Flask_JWT_postgresql_docker
 ```
 ### Build your docker Image
 
